@@ -1,0 +1,27 @@
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * *"
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+        - name: Clone Github Repo
+          uses: whyakari/github-repo-action@v3.1
+          with:
+            owner: dani-garcia
+            repository: vaultwarden
+        - name: actions-setup-mysql
+          uses: shogo82148/actions-setup-mysql@v1.49.0
+        - name: build
+          run: |
+           cargo build --release --features sqlite,mysql
+        - name: Upload a Build Artifact
+          uses: actions/upload-artifact@v3.2.2
+          with:
+            path: target/release
+
+
+
+
+            
