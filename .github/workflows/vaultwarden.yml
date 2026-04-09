@@ -9,7 +9,7 @@ jobs:
     steps:
         - name: Clone Github Repo
           run: |
-            git clone --depth 1 https://https://github.com/dani-garcia/vaultwarden
+            git clone --depth 1 https://github.com/dani-garcia/vaultwarden
         - name: setup mysql, openssl and postgresql
           run: |
                 choco install mysql
