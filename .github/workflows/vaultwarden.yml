@@ -14,6 +14,7 @@ jobs:
           run: |
            cd vaultwarden
            (Get-Content Cargo.toml) -replace '\[dependencies\]', "[dependencies]`nmysqlclient-sys = { version = '0.5', features = ['bundled'], optional = true }" | Set-Content Cargo.toml
+           cat Cargo.toml
            (Get-Content Cargo.toml) -replace 'openssl\s*=\s*"([\d\.]+)"', 'openssl = { version = "$1", features = ["vendored"] }' | Set-Content Cargo.toml
            cargo build --release --features sqlite,mysql
         - name: Upload a Build Artifact
