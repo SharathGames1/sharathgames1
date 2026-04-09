@@ -10,15 +10,13 @@ jobs:
         - name: Clone Github Repo
           run: |
             git clone --depth 1 https://github.com/dani-garcia/vaultwarden
-        - name: setup mysql, openssl
+        - name: setup mysql
           run: |
                 winget install Oracle.MySQL --silent --accept-package-agreements  --accept-source-agreements
-                winget install ShiningLight.OpenSSL.Dev --silent --accept-package-agreements --accept-source-agreements
         - name: build
-          env:
-            OPENSSL_DIR: C:\Program Files\OpenSSL-Win64
           run: |
            cd vaultwarden
+           (Get-Content Cargo.toml) -replace 'openssl\s*=\s*"([\d\.]+)"', 'openssl = { version = "$1", features = ["vendored"] }' | Set-Content Cargo.toml
            cargo build --release --features sqlite,mysql
         - name: Upload a Build Artifact
           uses: actions/upload-artifact@v4
