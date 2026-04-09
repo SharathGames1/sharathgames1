@@ -18,7 +18,7 @@ jobs:
           run: |
            cargo build --release --features sqlite,mysql
         - name: Upload a Build Artifact
-          uses: actions/upload-artifact@v3.2.2
+          uses: actions/upload-artifact@v4
           with:
             path: target/release
 
