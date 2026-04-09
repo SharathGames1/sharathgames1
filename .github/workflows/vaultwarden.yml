@@ -12,9 +12,9 @@ jobs:
             git clone --depth 1 https://github.com/dani-garcia/vaultwarden
         - name: setup mysql, openssl and postgresql
           run: |
-                choco install mysql
-                choco install openssl
-                choco install postgresql
+                winget install Oracle.MySQL --silent --accept-package-agreements  --accept-source-agreements
+                winget install -e --id ShiningLight.OpenSSL --silent --accept-package-agreements --accept-source-agreements
+                winget install --id PostgreSQL.PostgreSQL.17 --silent --accept-package-agreements --accept-source-agreements
         - name: build
           run: |
            cd vaultwarden
