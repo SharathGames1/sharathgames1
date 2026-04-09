@@ -16,7 +16,7 @@ jobs:
                 winget install ShiningLight.OpenSSL.Dev --silent --accept-package-agreements --accept-source-agreements
         - name: build
           env:
-            OPENSSL_DIR: CC:\Program Files\OpenSSL-Win64
+            OPENSSL_DIR: C:\Program Files\OpenSSL-Win64
           run: |
            cd vaultwarden
            cargo build --release --features sqlite,mysql
