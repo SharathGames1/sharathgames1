@@ -16,6 +16,7 @@ jobs:
           uses: shogo82148/actions-setup-mysql@v1.49.0
         - name: build
           run: |
+           cd vaultwarden
            cargo build --release --features sqlite,mysql
         - name: Upload a Build Artifact
           uses: actions/upload-artifact@v4
