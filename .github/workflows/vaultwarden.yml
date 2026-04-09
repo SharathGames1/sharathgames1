@@ -10,11 +10,10 @@ jobs:
         - name: Clone Github Repo
           run: |
             git clone --depth 1 https://github.com/dani-garcia/vaultwarden
-        - name: setup mysql, openssl and postgresql
+        - name: setup mysql, openssl
           run: |
                 winget install Oracle.MySQL --silent --accept-package-agreements  --accept-source-agreements
-                winget install -e --id ShiningLight.OpenSSL --silent --accept-package-agreements --accept-source-agreements
-                winget install --id PostgreSQL.PostgreSQL.17 --silent --accept-package-agreements --accept-source-agreements
+                winget install ShiningLight.OpenSSL.Dev --silent --accept-package-agreements --accept-source-agreements
         - name: build
           run: |
            cd vaultwarden
