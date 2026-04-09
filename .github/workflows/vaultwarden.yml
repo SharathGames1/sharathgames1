@@ -10,12 +10,10 @@ jobs:
         - name: Clone Github Repo
           run: |
             git clone --depth 1 https://github.com/dani-garcia/vaultwarden
-        - name: setup mysql
-          run: |
-                winget install Oracle.MySQL --silent --accept-package-agreements  --accept-source-agreements
-        - name: build
+        - name: Build Vaultwarden
           run: |
            cd vaultwarden
+           (Get-Content Cargo.toml) -replace 'mysql = \["diesel/mysql", "diesel_migrations/mysql"\]', 'mysql = ["diesel/mysql", "diesel_migrations/mysql", "mysqlclient-sys/bundled"]' | Set-Content Cargo.toml
            (Get-Content Cargo.toml) -replace 'openssl\s*=\s*"([\d\.]+)"', 'openssl = { version = "$1", features = ["vendored"] }' | Set-Content Cargo.toml
            cargo build --release --features sqlite,mysql
         - name: Upload a Build Artifact
