@@ -1,3 +1,4 @@
+name: Build Vaultwarden
 on:
   workflow_dispatch:
   schedule:
