@@ -8,12 +8,13 @@ jobs:
     runs-on: windows-latest
     steps:
         - name: Clone Github Repo
-          uses: whyakari/github-repo-action@v3.1
-          with:
-            owner: dani-garcia
-            repository: vaultwarden
-        - name: actions-setup-mysql
-          uses: shogo82148/actions-setup-mysql@v1.49.0
+          run: |
+            git clone --depth 1 https://https://github.com/dani-garcia/vaultwarden
+        - name: setup mysql, openssl and postgresql
+          run: |
+                choco install mysql
+                choco install openssl
+                choco install postgresql
         - name: build
           run: |
            cd vaultwarden
@@ -21,7 +22,7 @@ jobs:
         - name: Upload a Build Artifact
           uses: actions/upload-artifact@v4
           with:
-            path: target/release
+            path: vaultwarden/target/release
 
 
 
